@@ -29,12 +29,12 @@ declare module 'AuctionItem' {
 
   export interface IUserAuctionWonItem extends IAuctionItemBase {
     endDateTime: string;
-    winningBid: number;
+    winningAmount: number;
     auctionId: number;
   }
   export interface IUserAuctionLostItem extends IAuctionItemBase {
     endDateTime: string;
-    highestBid: number;
+    highestAmount: number;
     auctionId: number;
   }
   export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {}

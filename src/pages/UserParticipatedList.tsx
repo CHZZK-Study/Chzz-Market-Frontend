@@ -83,7 +83,7 @@ const UserParticipatedList = () => {
   return (
     <div className='mx-[-32px] my-[-4px]'>
       <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className='grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+      <div className="grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
         {activeTab === 'AuctionHistory' &&
           historyItems.map((product: IUserAuctionHistoryItem) => <OrderHistoryProduct key={product.auctionId} product={product} />)}
         {activeTab === 'AuctionsWon' && wonItems.map((product: IUserAuctionWonItem) => <OrderWonProduct key={product.auctionId} product={product} />)}

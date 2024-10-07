@@ -33,7 +33,7 @@ const UserOrderList = () => {
       {userList.map((item) => (
         <div
           key={item.id}
-          className="flex justify-between w-full py-2 border-b border-b-gray3"
+          className="flex justify-between w-full py-2 border-b border-b-gray3 cursor-pointer"
           onClick={() => handleItemClick(item.title)}
         >
           <h2 className="text-xl font-medium">{item.title}</h2>

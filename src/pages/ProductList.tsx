@@ -74,7 +74,7 @@ const ProductList = () => {
       <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }} ref={mainContainerRef}>
         <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <ProductButtons setSortType={setSortType} />
-        <div className='grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
           {activeTab === 'ongoing'
             ? ongoingItems?.map((product: IAuctionItem) => <OngoingProduct key={product.auctionId} product={product} />)
             : enrollItems?.map((product: IPreAuctionItem) => <PreEnrollProduct key={product.productId} product={product} />)}

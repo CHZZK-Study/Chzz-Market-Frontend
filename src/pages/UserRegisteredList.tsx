@@ -67,7 +67,7 @@ const UserRegisteredList = () => {
   return (
     <div className='mx-[-32px] my-[-4px]'>
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className='grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+      <div className="grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
         {activeTab === true ? (
           <EmptyBoundary dataLength={ongoingItems.length} type='userRegisterAuction'>
             {ongoingItems.map((product: IAuctionRegisteredItem) => (
