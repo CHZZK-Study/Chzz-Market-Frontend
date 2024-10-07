@@ -50,11 +50,14 @@ const PreAuction = () => {
   // 삭제 확인 다이얼로그에서 '삭제' 버튼 클릭 핸들러
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/v1/products/${preAuctionId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      });
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/v1/products/${preAuctionId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
       setIsDeleteConfirmOpen(false);
       setIsDeleteSuccessOpen(true);
     } catch (error) {
@@ -70,14 +73,22 @@ const PreAuction = () => {
 
   return (
     <Layout>
-      <Layout.Header title='제품 상세' handleModal={toggleMenu} />
+      <Layout.Header
+        title='제품 상세'
+        handleModal={toggleMenu}
+        isDisableMenuButton={!preAuctionDetails.isSeller}
+      />
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className='relative flex flex-col h-screen overflow-hidden'>
         <Layout.Main>
           {/* 상품 이미지 영역 */}
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
-              <img src={preAuctionDetails?.imageUrls[0]} alt={preAuctionDetails?.productName} className='object-cover w-full h-auto' />
+              <img
+                src={preAuctionDetails?.imageUrls[0]}
+                alt={preAuctionDetails?.productName}
+                className='object-cover w-full h-auto'
+              />
             </div>
           </div>
 
@@ -86,14 +97,19 @@ const PreAuction = () => {
             {/* 경매 아이템 제목 & 시작가 */}
             {preAuctionDetails && (
               <div className='mb-4'>
-                <p className='mb-1 text-lg font-bold'>{preAuctionDetails.productName || '[ERROR] 이름이 등록되지 않았어요!'}</p>
+                <p className='mb-1 text-lg font-bold'>
+                  {preAuctionDetails.productName ||
+                    '[ERROR] 이름이 등록되지 않았어요!'}
+                </p>
                 <p className='text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
                     <span className='mr-1'>
                       <img src={Price} alt='Price' />
                     </span>
                     시작가
-                    <span className='font-bold p'>{numberWithCommas(preAuctionDetails.minPrice)}원</span>
+                    <span className='font-bold p'>
+                      {numberWithCommas(preAuctionDetails.minPrice)}원
+                    </span>
                   </span>
                 </p>
               </div>
@@ -111,6 +127,7 @@ const PreAuction = () => {
             <SellersFooter
               likeCount={preAuctionDetails.likeCount}
               isSeller={preAuctionDetails.isSeller}
+              auctionId={preAuctionDetails.productId}
               status='PENDING'
             />
           ) : (
@@ -126,13 +143,22 @@ const PreAuction = () => {
         {/* 백드롭 */}
         {isMenuOpen && (
           <>
-            <div className='absolute inset-0 z-40 bg-black bg-opacity-50' onClick={closeMenu} />
+            <div
+              className='absolute inset-0 z-40 bg-black bg-opacity-50'
+              onClick={closeMenu}
+            />
             {/* 메뉴 (아코디언) */}
             <div className='absolute top-[10px] right-2 bg-white shadow-lg rounded-md z-50'>
-              <button className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200' onClick={onEditButtonClickHandler}>
+              <button
+                className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200'
+                onClick={onEditButtonClickHandler}
+              >
                 수정하기
               </button>
-              <button className='flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100' onClick={onDeleteButtonClickHandler}>
+              <button
+                className='flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100'
+                onClick={onDeleteButtonClickHandler}
+              >
                 삭제하기
               </button>
             </div>
@@ -141,10 +167,19 @@ const PreAuction = () => {
       </div>
       {/* 삭제 확인 다이얼로그 */}
       {isDeleteConfirmOpen && (
-        <ConfirmationModal message='정말 삭제하시겠습니까?' onConfirm={handleConfirmDelete} onCancel={() => setIsDeleteConfirmOpen(false)} />
+        <ConfirmationModal
+          message='정말 삭제하시겠습니까?'
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setIsDeleteConfirmOpen(false)}
+        />
       )}
       {/* 삭제 성공 메시지 */}
-      {isDeleteSuccessOpen && <SuccessModal message='아이템이 삭제되었습니다.' onClose={handleCloseSuccessModal} />}
+      {isDeleteSuccessOpen && (
+        <SuccessModal
+          message='아이템이 삭제되었습니다.'
+          onClose={handleCloseSuccessModal}
+        />
+      )}
     </Layout>
   );
 };

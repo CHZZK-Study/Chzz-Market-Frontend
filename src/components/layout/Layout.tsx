@@ -15,7 +15,7 @@ const Header = ({
   title,
   handleBack,
   handleModal = undefined,
-  isDisableMenuButton = false,
+  isDisableMenuButton = true,
 }: HeaderProps) => {
   const navigate = useNavigate();
   if (!handleBack) handleBack = () => navigate(-1);
