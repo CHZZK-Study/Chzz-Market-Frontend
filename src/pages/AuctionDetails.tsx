@@ -1,36 +1,25 @@
-/* eslint-disable prettier/prettier */
-import { useState } from 'react';
-import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
+import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
-import BuyersFooter from '@/components/details/BuyersFooter';
-import { CiCoins1 } from 'react-icons/ci';
-import Layout from '@/components/layout/Layout';
 import Participants from '@/assets/icons/participants.svg';
 import Price from '@/assets/icons/price.svg';
+import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
+import BuyersFooter from '@/components/details/BuyersFooter';
+import ImageList from '@/components/details/ImageList';
 import ProgressBar from '@/components/details/ProgressBar';
 import SellersFooter from '@/components/details/SellersFooter';
 import { useGetAuctionDetails } from '@/components/details/queries';
+import Layout from '@/components/layout/Layout';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import ImageList from '@/components/details/ImageList';
-import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
+import { useState } from 'react';
+import { CiCoins1 } from 'react-icons/ci';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
   const { auctionDetails } = useGetAuctionDetails(auctionId);
-  if (!auctionDetails) {
-    throw new Error('해당 물품을 찾을 수 없습니다.');
-  }
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
-  const [isPreAuction, _setIsPreAuction] = useState(false);
   const [_interestCount, _setInterestCount] = useState(1);
-
-  const totalTime = 24 * 60 * 60;
-
-  const navigate = useNavigate();
-  const handleBackClick = () => {
-    navigate('/');
-  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -44,7 +33,6 @@ const AuctionDetails = () => {
     <Layout>
       <Layout.Header
         title='제품 상세'
-        handleBack={handleBackClick}
         handleModal={toggleMenu}
         isDisableMenuButton
       />
@@ -67,8 +55,7 @@ const AuctionDetails = () => {
                 className={`bg-white z-10 py-1 ${isTimerFixed ? 'fixed top-0 left-0 right-0' : ''}`}
               >
                 <ProgressBar
-                  initialTimeRemaining={auctionDetails?.timeRemaining || 0}
-                  totalTime={totalTime} // Should be 86400
+                  initialTimeRemaining={auctionDetails.timeRemaining}
                 />
               </div>
             )}
@@ -79,14 +66,14 @@ const AuctionDetails = () => {
             {/* 경매 아이템 제목 & 시작가 */}
             {auctionDetails && (
               <div className='mb-4'>
-                <div className='mt-2 mb-2 flex flex-row items-center'>
+                <div className='flex flex-row items-center mt-2 mb-2'>
                   <div className='rounded-[50%] w-8 h-8 bg-slate-500' />
                   <p className='ml-3 text-black'>
-                    {auctionDetails?.sellerNickname || ''}
+                    {auctionDetails.sellerNickname}
                   </p>
                 </div>
                 <p className='mt-2 mb-2 text-2xl font-bold'>
-                  {auctionDetails?.productName || ''}
+                  {auctionDetails.productName}
                 </p>
                 <p className='mt-2 mb-2 text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
@@ -95,7 +82,7 @@ const AuctionDetails = () => {
                     </span>
                     시작가
                     <span className='font-bold'>
-                      {formatCurrencyWithWon(auctionDetails?.minPrice || 0)}
+                      {formatCurrencyWithWon(auctionDetails.minPrice)}
                     </span>
                   </span>
                 </p>
@@ -111,7 +98,7 @@ const AuctionDetails = () => {
                   </div>
                   <p className='text-xl font-bold text-gray-800'>
                     {auctionDetails?.isParticipated
-                      ? `${formatCurrencyWithWon(auctionDetails?.bidAmount || 0)}원`
+                      ? `${formatCurrencyWithWon(auctionDetails.bidAmount)}`
                       : '참여 전'}
                   </p>
                 </div>
@@ -126,9 +113,7 @@ const AuctionDetails = () => {
                     <p className='mb-1 text-sm text-gray-500'>참여 인원</p>
                   </div>
                   <p className='text-lg font-bold'>
-                    {auctionDetails?.participantCount
-                      ? `${auctionDetails?.participantCount}명`
-                      : '0명'}
+                    {`${auctionDetails.participantCount}명`}
                   </p>
                 </div>
               </div>
@@ -141,24 +126,20 @@ const AuctionDetails = () => {
           </div>
         </Layout.Main>
         {/* 화면 하단에 고정된 Footer */}
-        <Layout.Footer type={isPreAuction ? 'double' : 'single'}>
-          {auctionDetails && auctionDetails.isSeller ? (
-            <SellersFooter
-              auctionId={auctionId}
-              isSeller={auctionDetails?.isSeller || false}
-              status={auctionDetails?.status || ''}
-            />
-          ) : (
-            <BuyersFooter
-              auctionId={auctionId}
-              bidId={auctionDetails?.bidId ?? 0}
-              isSeller={auctionDetails?.isSeller ?? false}
-              status={auctionDetails?.status ?? ''}
-              isParticipated={auctionDetails?.isParticipated ?? false}
-              remainingBidCount={auctionDetails?.remainingBidCount ?? 0}
-            />
-          )}
-        </Layout.Footer>
+        {auctionDetails.isSeller ? (
+          <SellersFooter
+            auctionId={auctionId}
+            status={auctionDetails.status}
+          />
+        ) : (
+          <BuyersFooter
+            isParticipated={auctionDetails.isParticipated}
+            auctionId={auctionId}
+            bidId={auctionDetails.bidId ?? 0}
+            status={auctionDetails.status}
+            remainingBidCount={auctionDetails.remainingBidCount}
+          />
+        )}
         {/* 백드롭 */}
         {isMenuOpen && (
           <>

@@ -13,7 +13,7 @@ const ImageList = ({ images, productName, productId }: ImageListProps) => {
   const { length } = imageUrls;
 
   return (
-    <CustomCarousel length={length}>
+    <CustomCarousel length={length} loop>
       {imageUrls.map((img) => (
         <ImageItem
           key={`productId${productId}_${img.key}`}
