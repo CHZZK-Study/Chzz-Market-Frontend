@@ -26,6 +26,7 @@ vi.mocked(useGetAuctionDetails).mockReturnValue({
     status: 'PROCEEDING',
     timeRemaining: 25816,
     category: 'ELECTRONICS',
+    sellerProfileImageUrl: ''
   },
 });
 

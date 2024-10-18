@@ -20,6 +20,7 @@ export const auctionDetailsData: IAuctionDetails[] = [
     status: 'PROCEEDING',
     timeRemaining: 25816,
     category: 'ELECTRONICS',
+    sellerProfileImageUrl: '',
   },
   {
     bidAmount: 0,
@@ -38,5 +39,6 @@ export const auctionDetailsData: IAuctionDetails[] = [
     status: 'PROCEEDING',
     timeRemaining: 25816,
     category: 'ELECTRONICS',
+    sellerProfileImageUrl: '',
   },
 ];

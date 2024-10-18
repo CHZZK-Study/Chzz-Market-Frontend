@@ -2,13 +2,16 @@ import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from '../ui
 
 import { ReactNode } from 'react';
 
-const CustomCarousel = ({ contentStyle, length, children }: { contentStyle?: string; length: number; children: ReactNode }) => {
+interface CustomCarouselProps { contentStyle?: string; length: number; children: ReactNode; loop?: boolean }
+
+const CustomCarousel = ({ contentStyle, length, children, loop = false }: CustomCarouselProps) => {
   return (
     <Carousel
       opts={{
         align: 'start',
         dragFree: true,
         watchDrag: false,
+        loop
       }}
       className='w-full overflow-scroll'
     >

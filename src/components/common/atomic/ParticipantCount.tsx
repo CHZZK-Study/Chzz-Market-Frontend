@@ -7,8 +7,8 @@ const ParticipantCount = ({ count }: { count: number }) => {
       className="flex items-center text-xs sm:text-body2 text-gray2"
     >
       <img src={UserIcon} alt="참여자" />
-      <span className='whitespace-nowrap'>
-        참여자 <span className="text-xs text-black sm:text-body2Bold">{count}명</span>
+      <span className='overflow-hidden whitespace-nowrap pt-[2px]'>
+        참여자 <span className="ml-1 text-xs text-black sm:text-body2Bold">{count} 명</span>
       </span>
     </div>
   );

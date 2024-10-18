@@ -1,52 +1,56 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import HeartOffIcon from '@/assets/icons/heart_off.svg';
+import HeartOnIcon from '@/assets/icons/like_heart.svg';
 import Button from '@/components/common/Button';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { useConvertToAuction } from './queries';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import Layout from '../layout/Layout';
+import { useConvertAuction } from './queries';
 
 interface SellersFooterProps {
-  isSeller: boolean;
   likeCount?: number;
   status?: string;
   auctionId: number;
 }
 
 const SellersFooter: React.FC<SellersFooterProps> = ({
-  isSeller,
   status,
   likeCount = 0,
   auctionId,
 }) => {
-  const { mutate: convertToAuction } = useConvertToAuction();
-  const navigate = useNavigate();
-  const onConvertClickHandler = () => {
-    convertToAuction(auctionId);
-    navigate('/');
-  };
+  const { mutate: convertToAuction, isPending } = useConvertAuction();
+  const onConvertClickHandler = () => convertToAuction(auctionId)
 
-  if (isSeller && status === 'PROCEEDING') {
+  const HeartIcon = likeCount ? HeartOnIcon : HeartOffIcon;
+  const heartColor = likeCount ? "text-redNotice" : "text-gray2";
+
+  if (status === 'PROCEEDING') {
     return (
-      <div className='bg-gray-300 text-gray-600 p-4 rounded-lg text-center border border-dashed border-blue-200'>
-        내가 올린 경매
-      </div>
+      <Layout.Footer type='single'>
+        <Button type='button' disabled className='w-full h-full'>
+          내가 올린 경매
+        </Button>
+      </Layout.Footer>
     );
   }
 
-  if (isSeller && status === 'PENDING') {
+  if (status === 'PENDING') {
     return (
-      <div className='flex items-center flex-1 h-full gap-2'>
-        <AiOutlineHeart className='text-xl text-gray-500' />
-        <span className='text-gray-600'>{`${likeCount}명`}</span>
+      <Layout.Footer type='double'>
+        <div className="flex items-center h-full gap-2 basis-1/3">
+          <img src={HeartIcon} className={`${heartColor} size-6`} alt='하트 아이콘' />
+          <span className="pt-[2px] text-gray1 text-heading3">{`${likeCount} 명`}</span>
+        </div>
         <Button
-          type='button'
-          className='flex-[2] h-full'
-          color='cheeseYellow'
+          type="button"
+          className="h-full basis-4/5"
+          color="cheeseYellow"
           onClick={onConvertClickHandler}
+          disabled={isPending}
+          loading={isPending}
         >
           경매로 전환하기
         </Button>
-      </div>
+      </Layout.Footer>
     );
   }
 

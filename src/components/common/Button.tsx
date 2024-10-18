@@ -25,7 +25,7 @@ const Button = ({
   ariaLabel = '',
   loading = false,
 }: ButtonProps) => {
-  const baseClasses = 'focus:outline-none rounded transition-colors active:bg-black active:text-white box-border';
+  const baseClasses = 'focus:outline-none rounded-lg transition-colors active:bg-black active:text-white box-border';
   const colorClasses = classNames({
     'bg-black text-white border border-black': color === 'black',
     'bg-white text-black border border-black': color === 'white',  // 동일한 border 유지

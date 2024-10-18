@@ -1,6 +1,6 @@
 import useImageUrls from '@/hooks/useImageUrls';
 import CustomCarousel from '../common/CustomCarousel';
-import ImageItem from './ImageItem';
+import { CarouselItem } from '../ui/carousel';
 
 interface ImageListProps {
   images: string[] | { imageId?: number; imageUrl: string }[];
@@ -10,16 +10,14 @@ interface ImageListProps {
 
 const ImageList = ({ images, productName, productId }: ImageListProps) => {
   const imageUrls = useImageUrls(images);
-  const { length } = imageUrls;
 
   return (
-    <CustomCarousel length={length}>
+    <CustomCarousel length={imageUrls.length} loop>
       {imageUrls.map((img) => (
-        <ImageItem
-          key={`productId${productId}_${img.key}`}
-          url={img.imageUrl}
-          productName={productName}
-        />
+        <CarouselItem key={`productId_${productId}`}>
+          <img src={img.imageUrl} alt={productName} />
+        </CarouselItem>
+
       ))}
     </CustomCarousel>
   );

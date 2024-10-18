@@ -2,6 +2,7 @@ import { BIDDER_LIST_PRICE_FILTER } from "@/constants/filter";
 import { formatCurrencyWithWon } from "@/utils/formatCurrencyWithWon";
 import type { IBidder } from "Bid";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import AuctionItem from "../common/item/AuctionItem";
 import { useGetAuctionDetails } from "../details/queries";
@@ -10,6 +11,7 @@ import { useGetBidderList } from "./queries";
 
 const BidderListMain = ({ auctionId }: { auctionId: number }) => {
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);
+  const navigate = useNavigate()
 
   const handleFilterState = () =>
     setFilterState((prev) => (prev.name === BIDDER_LIST_PRICE_FILTER.HIGH.name ? BIDDER_LIST_PRICE_FILTER.LOW : BIDDER_LIST_PRICE_FILTER.HIGH));
@@ -51,7 +53,7 @@ const BidderListMain = ({ auctionId }: { auctionId: number }) => {
         </div>
       </Layout.Main>
       <Layout.Footer type='single'>
-        <Button type='button' color='cheeseYellow' className='w-full h-full' aria-label='최종 판매 버튼'>
+        <Button type='button' onClick={() => navigate(-1)} color='cheeseYellow' className='w-full h-full' aria-label='최종 판매 버튼'>
           확인 완료
         </Button>
       </Layout.Footer></>
