@@ -39,7 +39,7 @@ export const RegisterSchema = z.object({
   description: z.string().min(5, '상품 설명은 최소 5자 이상 입력해 주세요.').max(1000, '상품 설명은 최대 1000자 이하로 입력해 주세요.').or(z.literal('')),
 });
 
-export const AddressBookSchema = z.object({
+export const AuctionPaymentSchema = z.object({
   name: z.string().min(1, '이름을 입력해주세요.'),
   address: z.string().min(1, '주소를 입력해주세요.'),
   bank: z.string().min(1, '은행을 선택해주세요.'),

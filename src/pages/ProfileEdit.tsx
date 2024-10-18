@@ -16,13 +16,13 @@ import ErrorMessage from '@/components/common/error/ErrorMessage';
 const ProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
+  const { control, watch, handleSubmit, handleEditProfile, originalNickname, userProfileImageUrl } = useEditProfile();
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
   const [nicknameError, setNicknameError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [profileFile, setProfileFile] = useState<File | null>(null);
+  const [profileFile, setProfileFile] = useState<File | null>(userProfileImageUrl);
   const [_useDefaultImage, setUseDefaultImage] = useState(false);
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
-  const { control, watch, handleSubmit, handleEditProfile, originalNickname, userProfileImageUrl } = useEditProfile();
   const nickname = watch('nickname');
 
   const { refetch: checkNickname } = useQuery({
@@ -47,7 +47,7 @@ const ProfileEdit = () => {
         nickname,
         bio,
         link,
-        useDefaultImage: !profileFile
+        useDefaultImage: !profileFile,
       };
 
       if (profileFile) {

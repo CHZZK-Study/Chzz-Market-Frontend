@@ -11,12 +11,21 @@ declare module 'AuctionItem' {
     timeRemaining: number;
     isParticipated: boolean;
   }
-  export interface IAuctionRegisteredItem extends IAuctionItemBase {
+  export interface IAuctionOngoingRegisteredItem extends IAuctionItemBase {
     status: string;
     createdAt: string;
     participantCount: number;
     timeRemaining: number;
     auctionId: number;
+  }
+
+  export interface IAuctionEndRegisteredItem extends IAuctionItemBase {
+    auctionId: number;
+    participantCount: number;
+    winningBidAmount: number;
+    isWon: boolean;
+    isPaid: boolean;
+    createAt: string;
   }
 
   export interface IPreAuctionItem extends IAuctionItemBase {

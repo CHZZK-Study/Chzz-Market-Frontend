@@ -19,7 +19,8 @@ export const API_END_POINT = {
   NOTIFICATIONS: '/api/v1/notifications',
   REALTIME_NOTIFICATIONS: '/api/v1/notifications/subscribe',
 
-  USER_AUCTION_REGISTERED: '/api/v1/auctions/users',
+  USER_ONGOING_AUCTION_REGISTERED: '/api/v1/auctions/users/proceeding',
+  USER_END_AUCTION_REGISTERD: '/api/v1/auctions/users/ended',
   USER_PRE_AUCTION_REGISTERED: '/api/v1/products/users',
 
   AUCTION_ITEM: '/api/v1/auctions/auction/:auctionId',

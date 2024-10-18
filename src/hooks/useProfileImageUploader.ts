@@ -1,8 +1,8 @@
 import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 
 export const useProfileImageUploader = (
-  _state: string | null,
-  setState: Dispatch<SetStateAction<string | null>>,
+  _image: string | null,
+  setImage: Dispatch<SetStateAction<string | null>>,
   file: File | null,
   setFile: Dispatch<SetStateAction<File | null>>,
   setOnMenu: Dispatch<SetStateAction<boolean>>
@@ -28,7 +28,7 @@ export const useProfileImageUploader = (
     try {
       const newImage = await convertFileToDataURL(newFile);
       setFile(newFile);
-      setState(newImage);
+      setImage(newImage);
     } catch (error) {
       throw new Error('Error reading file!');
     }
@@ -43,7 +43,7 @@ export const useProfileImageUploader = (
 
   const deleteImage = () => {
     setFile(null);
-    setState(null);
+    setImage(null);
     setOnMenu(false);
   };
 

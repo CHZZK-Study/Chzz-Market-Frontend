@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import { z } from 'zod';
-import { AddressBookSchema } from '@/constants/schema';
 import { useForm } from 'react-hook-form';
 import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
@@ -10,8 +9,9 @@ import SelectBank from '@/components/profile/SelectBank';
 import { useRef, useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import { usePostOrderId } from '@/hooks/usePayment';
+import { AuctionPaymentSchema } from '@/constants/schema';
 
-type FormFields = z.infer<typeof AddressBookSchema>;
+type FormFields = z.infer<typeof AuctionPaymentSchema>;
 
 const defaultValues = {
   name: '',
@@ -19,7 +19,7 @@ const defaultValues = {
   bank: '',
 };
 
-const AddressBook = () => {
+const AuctionPayment = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
   const { auctionId } = useParams<{ auctionId: string }>();
@@ -194,4 +194,4 @@ const AddressBook = () => {
   );
 };
 
-export default AddressBook;
+export default AuctionPayment;

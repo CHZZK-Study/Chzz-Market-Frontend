@@ -3,26 +3,15 @@ import { LuUsers } from 'react-icons/lu';
 import ProductItem from '../common/item/ProductItem';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import MinPrice from '../common/atomic/MinPrice';
+import CreatedAt from '../common/atomic/Created';
 
 const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
-  const date = new Date(product.endDateTime);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-
-  const formattedDate = `${year}년 ${month}월 ${day}일`;
   const formattedWinningPrice = formatCurrencyWithWon(product.winningAmount);
-  
+
   return (
     <ProductItem product={product}>
       <MinPrice price={product.minPrice} />
-      <div className='flex'>
-        <div className='flex gap-2'>
-          <LuUsers className='text-gray-500' />
-          <p className='text-sm text-gray-500'>마감된 날짜</p>
-        </div>
-        <p className='ml-4 font-semibold'>{formattedDate}</p>
-      </div>
+      <CreatedAt createAt={product.endDateTime} />
       <div className='flex'>
         <div className='flex gap-2'>
           <LuUsers className='text-gray-500' />

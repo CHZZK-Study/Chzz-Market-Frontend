@@ -86,7 +86,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount}
           <div
             className="flex flex-col items-center w-1/2 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate(ROUTERS.REGISTERED_LIST, { state: { sortType: true } })
+              navigate(ROUTERS.REGISTERED_LIST, { state: { sortType: 'ongoing' } })
             }
           >
             <img src={AuctionIcon} alt="정식 경매" className="w-8 h-8 mb-2" />
@@ -98,7 +98,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount}
           <div
             className="flex flex-col items-center w-1/2 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate(ROUTERS.REGISTERED_LIST, { state: { sortType: false } })
+              navigate(ROUTERS.REGISTERED_LIST, { state: { sortType: 'preEnroll' } })
             }
           >
             <img

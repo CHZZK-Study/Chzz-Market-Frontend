@@ -1,7 +1,8 @@
 declare module 'AuctionList' {
   import type {
     IAuctionItem,
-    IAuctionRegisteredItem,
+    IAuctionOngoingRegisteredItem,
+    IAuctionEndRegisteredItem,
     IPreAuctionItem,
     IPreAuctionRegisteredItem,
     IUserAuctionHistoryItem,
@@ -21,7 +22,8 @@ declare module 'AuctionList' {
 
   export interface IAuctionList extends PaginationData<IAuctionItem> {}
   export interface IPreAuctionList extends PaginationData<IPreAuctionItem> {}
-  export interface IAuctionRegisteredList extends PaginationData<IAuctionRegisteredItem> {}
+  export interface IAuctionOngoingRegisteredList extends PaginationData<IAuctionOngoingRegisteredItem> {}
+  export interface IAuctionEndRegisteredList extends PaginationData<IAuctionEndRegisteredItem> {}
   export interface IPreAuctionRegisteredList extends PaginationData<IPreAuctionRegisteredItem> {}
   export interface IUserAuctionWonList extends PaginationData<IUserAuctionWonItem> {}
   export interface IUserAuctionHistoryList extends PaginationData<IUserAuctionHistoryItem> {}

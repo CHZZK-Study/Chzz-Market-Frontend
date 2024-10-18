@@ -12,7 +12,6 @@ import PrivateRoute from './components/common/route/PrivateRoute';
 import PublicRoute from './components/common/route/PublicRoute';
 import GlobalLayout from './components/layout/GlobalLayout';
 import LayoutWithNav from './components/layout/LayoutWithNav';
-import AddressBook from './pages/AddressBook';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -25,6 +24,9 @@ import User from './pages/User';
 import OrderHistory from './pages/UserParticipatedList';
 import UserRegisteredList from './pages/UserRegisteredList';
 import PaymentSuccess from './pages/PaymentSuccess';
+import AuctionPayment from './pages/AuctionPayment';
+import DeliveryAddressList from './pages/DeliveryAddressList';
+import DeliveryAddressAdd from './pages/DeliveryAddressAdd';
 
 const layoutWithNavRouteList = [
   {
@@ -78,12 +80,20 @@ const privateRouteList = [
     loader: registerLoader,
   },
   {
-    path: ROUTERS.ADDRESSBOOK,
-    element: <AddressBook />,
+    path: ROUTERS.AUCTION_PAYMENT,
+    element: <AuctionPayment />,
   },
   {
     path: ROUTERS.PAYMENT_SUCCESS,
     element: <PaymentSuccess />
+  },
+  {
+    path: ROUTERS.DELIVERY_ADDRESS_LIST,
+    element: <DeliveryAddressList />
+  },
+  {
+    path: ROUTERS.DELIVERY_ADDRESS_ADD,
+    element: <DeliveryAddressAdd />
   }
 ];
 
